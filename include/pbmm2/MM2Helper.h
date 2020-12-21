@@ -6,6 +6,7 @@
 #include <map>
 #include <memory>
 #include <vector>
+#include <unordered_map>
 
 #include <boost/algorithm/string.hpp>
 
@@ -45,7 +46,7 @@ struct Index
     // as long as this Index instance.
     Index(const std::vector<BAM::FastaSequence>& refs, const mm_idxopt_t& opts);
     Index(const std::string& fname, const mm_idxopt_t& opts, const int32_t& numThreads,
-          const std::string& outputMmi = "");
+          const std::string& outputMmi = "", const std::string& alt_list = "");
 
     ~Index();
 

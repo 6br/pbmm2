@@ -5,5 +5,5 @@ option('sse41',
 
 option('tests',
     type : 'boolean',
-    value : true,
+    value : false,
     description : 'Enable dependencies required for testing')

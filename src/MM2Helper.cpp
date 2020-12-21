@@ -935,7 +935,7 @@ void Index::IndexFrom(const std::vector<BAM::FastaSequence>& refs, const mm_idxo
 }
 
 Index::Index(const std::string& fname, const mm_idxopt_t& opts, const int32_t& numThreads,
-             const std::string& outputMmi)
+             const std::string& outputMmi, const std::string& alt_list)
     : idx_{nullptr}
 {
     PBLOG_INFO << "Start reading/building index";
@@ -945,6 +945,7 @@ Index::Index(const std::string& fname, const mm_idxopt_t& opts, const int32_t& n
     idx_ = mm_idx_reader_read(rdr, numThreads);
     if (!idx_) throw std::runtime_error("unable to index reference!");
     mm_idx_reader_close(rdr);
+    if (!alt_list.empty()) mm_idx_alt_read(idx_, alt_list.c_str());
     PBLOG_INFO << "Finished reading/building index";
 }
 

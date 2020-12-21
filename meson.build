@@ -95,7 +95,7 @@ subdir('src')
 if not meson.is_subproject()
   if get_option('tests')
     pbmm2_clang_formatter = find_program('tools/check-formatting')
-    pbmm2_cram_script = find_program('cram', required : true)
+    pbmm2_cram_script = find_program('cram')
     subdir('tests')
   endif
 endif
