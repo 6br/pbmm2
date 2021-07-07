@@ -23,9 +23,9 @@ namespace minimap2 {
 namespace {
 bool CheckPositionalArgs(const std::vector<std::string>& args)
 {
-    if (args.size() != 2) {
+    if (args.size() <= 2) {
         PBLOG_FATAL << "Please provide both arguments: input output!";
-        PBLOG_FATAL << "EXAMPLE: pbmm2 index reference.fasta output.mmi";
+        PBLOG_FATAL << "EXAMPLE: pbmm2 index reference.fasta output.mmi <alt_file>";
         return false;
     }
 
@@ -72,11 +72,14 @@ int IndexWorkflow::Runner(const CLI_v2::Results& options)
 
     const std::string refFile = fastaFiles.front();
     const std::string outFile = options.PositionalArguments()[1];
+    const std::string altFile = options.PositionalArguments()[2];
 
     if (Utility::FileExists(outFile))
         PBLOG_WARN << "Warning: Overwriting existing output file: " << outFile;
 
-    MM2Helper mm2helper(refFile, settings, outFile);
+    if (Utility::FileExists(altFile))
+        PBLOG_WARN << "Info: Found alt file: " << altFile;
+    MM2Helper mm2helper(refFile, settings, outFile, altFile);
 
     return EXIT_SUCCESS;
 }

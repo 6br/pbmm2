@@ -111,7 +111,7 @@ Data::Cigar RenderCigar(const mm_reg1_t* const r, const int qlen, const int opt_
 }  // namespace
 
 MM2Helper::MM2Helper(const std::string& refs, const MM2Settings& settings,
-                     const std::string& outputMmi)
+                     const std::string& outputMmi, const std::string& alt_list)
     : NumThreads{settings.NumThreads}
     , alnMode_(settings.AlignMode)
     , trimRepeatedMatches_(!settings.NoTrimming)
@@ -119,7 +119,7 @@ MM2Helper::MM2Helper(const std::string& refs, const MM2Settings& settings,
 {
     std::string preset;
     PreInit(settings, &preset);
-    Idx = std::make_unique<Index>(refs, IdxOpts, NumThreads, outputMmi);
+    Idx = std::make_unique<Index>(refs, IdxOpts, NumThreads, outputMmi, alt_list);
     PostInit(settings, preset, outputMmi.empty());
     SetEnforcedMapping(settings.EnforcedMapping);
 }

@@ -77,7 +77,7 @@ public:
     // as long as this MM2Helper instance!
     MM2Helper(const std::vector<BAM::FastaSequence>& refs, const MM2Settings& settings);
     MM2Helper(const std::string& refs, const MM2Settings& settings,
-              const std::string& outputMmi = "");
+              const std::string& outputMmi = "", const std::string& alt_names = "");
 
 public:
     // BamRecord API
